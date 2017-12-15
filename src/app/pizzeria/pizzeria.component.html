@@ -1,0 +1,22 @@
+<p>Orders:</p>
+<button pButton type="button" (click)="orderPizza()" icon="fa-search fa-2x" pTooltip="Order 10 Pizza" tooltipPosition="top"></button>
+<input type="text" style="width: 50px;" pInputText [(ngModel)]="orderInterval">
+
+<div class="ui-g">
+  <div class="ui-g-6">
+      <ul>
+          <li *ngFor="let customer of customers">
+              {{customer.name}} - {{customer.timestamp | date: 'HH:mm:ss' }}
+          </li>
+        </ul>
+  </div>
+  <div class="ui-g-6">
+    <ul>
+      <li *ngFor="let order of orders">
+        {{ order.timestamp | date: 'HH:mm:ss' }} - {{order.pizza}} - {{order.location}} - {{order.customer}} - Wait time: {{order.waitTime}} sec 
+        <img class="emoji" alt="logo" src="{{order.mood}}"/>
+      </li>
+    </ul>
+  </div>
+
+</div>

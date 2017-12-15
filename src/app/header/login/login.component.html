@@ -1,0 +1,22 @@
+<div class="login-modal">
+  <a (click)="onShowLoginDialog()"><i class="fa fa-sign-in fa-lg" aria-hidden="true"></i>Sign in</a>
+  <p-dialog header="Sign in to Revenue AllNotes" [(visible)]="showLoginDialog" resizable="false" draggable="false" modal="true">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+          <input type="text" pInputText placeholder="Username">
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+          <input type="password" pInputText placeholder="Password">
+        </div>
+      </div>
+    </div>
+    <p-footer>
+      <button type="text" (click)="authenticateUser()" pButton icon="fa-external-link-square" label="Sign in"></button>
+    </p-footer>
+  </p-dialog>
+</div>

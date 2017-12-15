@@ -1,0 +1,31 @@
+.layout-topbar {
+  background-color: #025f63;
+  border-bottom: 14px solid #00c6c6;
+  display: block;
+  padding: 0;
+  height: 72px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9997;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+}
+
+.layout-topbar .logo img {
+  height: 55px;
+  margin: 10px;
+}
+
+.topbar-login {
+  float: right;
+  padding-right: 20px;
+  padding-top: 25px;
+  font-size: 16px;
+}
+
+.topbar-title {
+  font-size: 38px;
+  color: #fafafa;
+}
