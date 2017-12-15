@@ -13,8 +13,14 @@ export class PizzeriaComponent implements OnInit {
 
   orders: Order[] = [];
   customers: Customer[] = [];
-  orderInterval = 5000;
+  orderInterval: number = 5000;
+  nrClients = 50;
   private imgSrc: string;
+  private happy = 0;
+  private unhappy = 0;
+  private angry = 0;
+  moodData: any;
+  private _sub: any;
 
   constructor(private pizzeriaService: PizzeriaService) { }
 
@@ -23,10 +29,14 @@ export class PizzeriaComponent implements OnInit {
 
   }
 
-  orderPizza() {
+  stopOrderPizza() {
+    this._sub.unsubscribe();
+  }
+
+  startOrderPizza() {
     this._clearMoods();
 
-    Observable.interval(this.orderInterval).take(10).subscribe(
+    this._sub = Observable.interval(this.orderInterval).take(this.nrClients).subscribe(
       () => {
         const orderStartTime = new Date(Date.now()).valueOf();
         this.customers.push({ name: 'Mario', timestamp: new Date(orderStartTime) });
@@ -36,7 +46,8 @@ export class PizzeriaComponent implements OnInit {
             const waitTime = (orderEndTime.valueOf() - orderStartTime.valueOf()) / 1000;
             order.mood = this._setMood(waitTime);
             order.waitTime = waitTime;
-            this.orders.push(order);
+            const tempOrderArray: Order[] = [order];
+            this.orders.push.apply(this.orders, tempOrderArray);
 
           });
       }
@@ -47,11 +58,33 @@ export class PizzeriaComponent implements OnInit {
   private _setMood(waitTime: number): string {
     if (waitTime < 6) {
       this.imgSrc = 'assets/images/happy-customer.png';
+      this.happy = this.happy + 1;
     } else if (waitTime > 6 && waitTime < 10) {
       this.imgSrc = 'assets/images/unhappy-customer.png';
+      this.unhappy = this.unhappy + 1;
     } else if (waitTime > 10) {
       this.imgSrc = 'assets/images/angry-customer.png';
+      this.angry = this.angry + 1;
     }
+
+    this.moodData = {
+      labels: ['Angry', 'Unhappy', 'Happy'],
+      datasets: [
+        {
+          data: [this.angry, this.unhappy, this.happy],
+          backgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56"
+          ],
+          hoverBackgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56"
+          ]
+        }]
+    };
+
     return this.imgSrc;
   }
 

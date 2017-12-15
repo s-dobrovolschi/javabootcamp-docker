@@ -1,9 +1,9 @@
 .layout-topbar {
-  background-color: #025f63;
-  border-bottom: 14px solid #00c6c6;
+  background-color: #e4f4fd;
+  border-bottom: 29px solid #40c0ef;
   display: block;
   padding: 0;
-  height: 72px;
+  height: 100px;
   box-sizing: border-box;
   position: fixed;
   top: 0;
@@ -14,8 +14,8 @@
 }
 
 .layout-topbar .logo img {
-  height: 55px;
-  margin: 10px;
+  height: 100px;
+  
 }
 
 .topbar-login {
