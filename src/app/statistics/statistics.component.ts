@@ -8,7 +8,8 @@ import { Input } from '@angular/core';
 })
 export class StatisticsComponent implements OnInit {
 
-  @Input() data: any;
+  @Input() moodData: any;
+  @Input() locationsData: any;
 
 
   constructor() {

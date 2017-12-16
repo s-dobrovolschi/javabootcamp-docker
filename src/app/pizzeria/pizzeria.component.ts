@@ -3,6 +3,7 @@ import { PizzeriaService } from '../domain/service/pizzeria.service';
 import { Order } from '../domain/model/Order';
 import { Observable } from 'rxjs';
 import { Customer } from '../domain/model/customer';
+import { Location } from '../domain/model/location';
 
 @Component({
   selector: 'app-pizzeria',
@@ -20,7 +21,9 @@ export class PizzeriaComponent implements OnInit {
   private unhappy = 0;
   private angry = 0;
   moodData: any;
+  locationsData: any;
   private _sub: any;
+  private _locations: Map<string, Location> = new Map([['', null]]);
 
   constructor(private pizzeriaService: PizzeriaService) { }
 
@@ -45,6 +48,7 @@ export class PizzeriaComponent implements OnInit {
             const orderEndTime = new Date(Date.now()).valueOf();
             const waitTime = (orderEndTime.valueOf() - orderStartTime.valueOf()) / 1000;
             order.mood = this._setMood(waitTime);
+            this._setLocationsData(order);
             order.waitTime = waitTime;
             const tempOrderArray: Order[] = [order];
             this.orders.push.apply(this.orders, tempOrderArray);
@@ -68,24 +72,59 @@ export class PizzeriaComponent implements OnInit {
     }
 
     this.moodData = {
-      labels: ['Angry', 'Unhappy', 'Happy'],
+      labels: ['Happy', 'Unhappy', 'Angry'],
       datasets: [
         {
-          data: [this.angry, this.unhappy, this.happy],
+          data: [this.happy, this.unhappy, this.angry],
           backgroundColor: [
-            "#FF6384",
+            "#FFCE56",
             "#36A2EB",
-            "#FFCE56"
+            "#FF6384"
           ],
           hoverBackgroundColor: [
-            "#FF6384",
+            "#FFCE56",
             "#36A2EB",
-            "#FFCE56"
+            "#FF6384"
           ]
         }]
     };
 
     return this.imgSrc;
+  }
+
+  private _setLocationsData(order: Order): void {
+    if (this._locations.get(order.location)) {
+      this._locations.get(order.location).count = ++this._locations.get(order.location).count;
+    } else {
+      const location: Location = { ipAddr: order.location, name: order.location, count: 1 };
+      this._locations.set(location.ipAddr, location);
+    }
+    console.log(this._locations);
+
+    const datasets = [];
+    datasets.push({
+      label: '',
+      backgroundColor: '#FFFFFF',
+      borderColor: '#FFFFFF',
+      data: [0]
+    });
+    this._locations.forEach(location => {
+      if (location) {
+        datasets.push({
+          label: location.ipAddr,
+          backgroundColor: '#42A5F5',
+          borderColor: '#1E88E5',
+          data: [location.count]
+        });
+      }
+
+    }
+    );
+
+    this.locationsData = {
+      labels: ['Containers'],
+      datasets: datasets
+    };
   }
 
   private _clearMoods() {

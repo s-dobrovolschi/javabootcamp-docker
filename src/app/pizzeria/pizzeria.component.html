@@ -1,45 +1,20 @@
 <div class="ui-g">
-  <div class="ui-g-4">
+  <div class="ui-g-3">
     <button pButton type="button" label="Start" (click)="startOrderPizza()" icon="fa-play"></button>
     <button class="ui-button-danger" pButton type="button" label="Stop" (click)="stopOrderPizza()" icon="fa-stop"></button>
     <h3 class="first">Clients: {{nrClients}}</h3>
     <p-slider [(ngModel)]="nrClients" [step]="10" [min]="10" [max]="100"></p-slider>
     <h3 class="first">Order interval: {{orderInterval}} ms</h3>
-    <p-slider [(ngModel)]="orderInterval" [step]="500" [min]="0" [max]="10000"></p-slider>
+    <p-slider [(ngModel)]="orderInterval" [step]="50" [min]="0" [max]="10000"></p-slider>
   </div>
-  <div class="ui-g-4">
-      <app-statistics [data]="moodData"></app-statistics>
-  </div>
-  <div class="ui-g-4">
-        <app-statistics [data]="moodData"></app-statistics>
+  <div class="ui-g-8 ui-g-offset-1">
+    <app-statistics [moodData]="moodData" [locationsData]="locationsData"></app-statistics>
   </div>
   <div class="ui-g-12">
     <hr>
     <h3>Orders:</h3>
   </div>
   <div class="ui-g-12">
-      <app-online-orders [orders]="orders"></app-online-orders>
-    </div>
-  <div class="ui-g-6">
-    <ul>
-      <li *ngFor="let customer of customers">
-        {{customer.name}} - {{customer.timestamp | date: 'HH:mm:ss' }}
-      </li>
-    </ul>
+    <app-online-orders [orders]="orders"></app-online-orders>
   </div>
-  <div class="ui-g-6">
-    <ul>
-      <li *ngFor="let order of orders">
-        {{ order.timestamp | date: 'HH:mm:ss' }} - {{order.pizza}} - {{order.location}} - {{order.customer}} - Wait time: {{order.waitTime}}
-        sec
-        <img class="emoji" alt="logo" src="{{order.mood}}" />
-      </li>
-    </ul>
-  </div>
-  <div class="ui-g-12">
-    <hr>
-    <h3>Statistics</h3>
-  </div>
-  
-
 </div>

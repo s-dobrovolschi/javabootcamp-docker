@@ -8,13 +8,22 @@ import { Observable } from 'rxjs/Observable';
 export class PizzeriaService {
 
     switchNode = true;
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-    getPizza(customer: string): Observable<Order> {
+    /* getPizza(customer: string): Observable<Order> {
         const node = this.switchNode ? '/node-1' : '/node-2';
         const apiURI = node + '/api/order/pizza?customer=' + customer;
         console.log('Ordering pizza - ' + new Date(Date.now()).toISOString());
         this.switchNode = !this.switchNode;
         return this.http.get<Order>(apiURI);
+    } */
+
+
+    getPizza(customer: string): Observable<Order> {
+        const node = '/node-1';
+        const apiURI = node + '/api/order/pizza?customer=' + customer;
+        console.log('Ordering pizza - ' + new Date(Date.now()).toISOString());
+        return this.http.get<Order>(apiURI);
     }
+
 }
