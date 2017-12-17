@@ -1,5 +1,6 @@
 <p-dataTable [value]="orders" [rows]="10" [paginator]="true" [immutable]="false">
-  <p-header>Orders Online</p-header>
+  <p-header><strong>Mario's Pizza - Online Orders</strong></p-header>
+  <p-column field="id" header="Order Number"></p-column>
   <p-column header="Order Time">
     <ng-template let-order="rowData" pTemplate="body">
       {{ order.timestamp | date: 'HH:mm:ss' }}
@@ -7,9 +8,13 @@
   </p-column>
   <p-column field="pizza" header="Pizza"></p-column>
   <p-column field="location" header="Location"></p-column>
-  <p-column field="customer" header="Client"></p-column>
-  <p-column field="waitTime" header="Wait time"></p-column>
-  <p-column header="Mood">
+  <p-column field="customer" header="Customer Name"></p-column>
+  <p-column header="Wait time">
+      <ng-template let-order="rowData" pTemplate="body">
+        {{ order.waitTime | second }}
+      </ng-template>
+    </p-column>
+  <p-column header="TripAdvisor Review">
       <ng-template let-order="rowData" pTemplate="body">
         <img class="emoji" alt="logo" src="{{order.mood}}" />
       </ng-template>

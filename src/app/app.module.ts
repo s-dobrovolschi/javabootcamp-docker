@@ -14,6 +14,7 @@ import {SliderModule} from 'primeng/primeng';
 import {DataTableModule, SharedModule} from 'primeng/primeng';
 import { BankAccountComponent } from './bank-account/bank-account.component';
 import { OnlineOrdersComponent } from './online-orders/online-orders.component';
+import { SecondPipe } from './domain/pipe/second.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { OnlineOrdersComponent } from './online-orders/online-orders.component';
     PizzeriaComponent,
     StatisticsComponent,
     BankAccountComponent,
-    OnlineOrdersComponent
+    OnlineOrdersComponent,
+    SecondPipe
   ],
   imports: [
     BrowserModule,

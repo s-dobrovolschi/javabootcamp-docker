@@ -1,16 +1,9 @@
 {
-    "/node-1/api": {
+    "/api": {
       "target": "http://192.168.99.100:8080",
       "secure": false,
       "pathRewrite": {
-        "^/node-1/api": ""
-      }
-    },
-    "/node-2/api": {
-      "target": "http://192.168.99.100:8081",
-      "secure": false,
-      "pathRewrite": {
-        "^/node-2/api": ""
+        "^/api": ""
       }
     }
   }

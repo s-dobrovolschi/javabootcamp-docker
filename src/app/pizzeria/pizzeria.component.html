@@ -1,18 +1,20 @@
 <div class="ui-g">
-  <div class="ui-g-3">
+  <div class="ui-g-2">
     <button pButton type="button" label="Start" (click)="startOrderPizza()" icon="fa-play"></button>
     <button class="ui-button-danger" pButton type="button" label="Stop" (click)="stopOrderPizza()" icon="fa-stop"></button>
-    <h3 class="first">Clients: {{nrClients}}</h3>
-    <p-slider [(ngModel)]="nrClients" [step]="10" [min]="10" [max]="100"></p-slider>
-    <h3 class="first">Order interval: {{orderInterval}} ms</h3>
-    <p-slider [(ngModel)]="orderInterval" [step]="50" [min]="0" [max]="10000"></p-slider>
+    <h3 class="first"><i>Pizza preparation time?</i> {{deliveryCapacity}} sec</h3>
+    <p-slider [(ngModel)]="deliveryCapacity" [step]="1" [min]="1" [max]="10"></p-slider>
+    <h3 class="first"><i>How many orders?</i> {{totalOrders}}</h3>
+    <p-slider [(ngModel)]="totalOrders" [step]="10" [min]="10" [max]="100"></p-slider>
+    <h3 class="first"><i>Ordering frequency:</i> {{orderInterval | second}} sec</h3>
+    <p-slider [(ngModel)]="orderInterval" [step]="50" [min]="50" [max]="5000"></p-slider>
   </div>
-  <div class="ui-g-8 ui-g-offset-1">
+  <div class="ui-g-10">
     <app-statistics [moodData]="moodData" [locationsData]="locationsData"></app-statistics>
   </div>
   <div class="ui-g-12">
     <hr>
-    <h3>Orders:</h3>
+    <h3>Deliveroo - delivery service</h3>
   </div>
   <div class="ui-g-12">
     <app-online-orders [orders]="orders"></app-online-orders>
